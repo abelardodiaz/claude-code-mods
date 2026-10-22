@@ -1,0 +1,21 @@
+{
+  "name": "flota",
+  "version": "0.2.0",
+  "description": "Live pane listing your Claude Code sessions (local and Remote Control) and the claude-rc instances on your servers, with restart, start and URL buttons",
+  "license": "MIT",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "hosts": {
+      "type": "string",
+      "title": "Servers",
+      "description": "Comma-separated SSH hosts that run claude-rc (for example: vps1,vps2). Leave empty to list sessions only.",
+      "default": ""
+    },
+    "sshCommand": {
+      "type": "string",
+      "title": "SSH command",
+      "description": "Command used to reach the servers. On Windows with keys in WSL use: wsl ssh",
+      "default": "ssh"
+    }
+  }
+}

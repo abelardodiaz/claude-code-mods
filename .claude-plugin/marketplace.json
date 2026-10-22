@@ -1,0 +1,11 @@
+{
+  "name": "claude-code-mods",
+  "owner": { "name": "Abelardo Diaz" },
+  "plugins": [
+    {
+      "name": "flota",
+      "source": "./plugins/flota",
+      "description": "Live pane with your Claude Code sessions (local and Remote Control) and the claude-rc instances on your servers"
+    }
+  ]
+}
