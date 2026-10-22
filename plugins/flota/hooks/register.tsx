@@ -225,6 +225,8 @@ export const register: Register = (on, options) => {
 
   on('session.start', async ($, e, next) => {
     await $.command.register({ name: 'flota', description: 'Panel de sesiones de la flota. ' + AYUDA })
+    // Limpia cualquier texto viejo que el mod haya dejado en la linea de estado.
+    $.ui.status(undefined)
 
     const refrescar = async () => {
       try {
@@ -770,7 +772,7 @@ export const register: Register = (on, options) => {
           inst,
           reg,
           // Remote Control conocido: sesion Remote Control o instancia de servidor.
-          rc: remota || Boolean(inst),
+          rc: g !== 'fuera' && (remota || Boolean(inst)),
         }
       })
       .sort((a, b) => {
