@@ -13,6 +13,8 @@ const AZUL = '#0000AA'
 const CIAN = '#00AAAA'
 const GRIS = '#AAAAAA'
 const AMARILLO = '#FFFF55'
+// Fondo de las filas de las tablas: sin fondo (el de la terminal). Para volver al azul: AZUL.
+const FONDO_TABLA: string | undefined = undefined
 // Un pedazo de linea con su color (para los titulos amarillos de las ventanas).
 type Seg = { t: string; c?: string }
 type Celda = { t: string; c?: string }
@@ -722,12 +724,12 @@ export const register: Register = (on, options) => {
           <Text> </Text>
           {ventana(corto(elegido), lineasDisp)}
           <Text> </Text>
-          <Text backgroundColor={AZUL} color={AMARILLO} bold>{llenar(c('', 2) + c('DISP', 10) + c('CPU', 10) + c('RAM', 13) + c('DISCO', 13) + c('ENCEND', 9) + c('CLAUDE', 8) + 'RC')}</Text>
+          <Text backgroundColor={GRIS} color={AZUL} bold>{llenar(c('', 2) + c('DISP', 10) + c('CPU', 10) + c('RAM', 13) + c('DISCO', 13) + c('ENCEND', 9) + c('CLAUDE', 8) + 'RC')}</Text>
           {filasSalud.map(fl => {
             const largo = 2 + fl.celdas.reduce((n, x) => n + x.t.length, 0)
             return (
               <Button key={`disp:${fl.k}`} plain onPress={() => void update($, dispSel, () => fl.k)}>
-                <Text backgroundColor={AZUL} color="white" bold={fl.k === elegido}>
+                <Text backgroundColor={FONDO_TABLA} color="white" bold={fl.k === elegido}>
                   {fl.k === elegido ? '► ' : '  '}
                   {fl.celdas.map(x => (x.c ? <Text color={x.c}>{x.t}</Text> : x.t))}
                   {' '.repeat(Math.max(0, W - largo))}
@@ -865,7 +867,7 @@ export const register: Register = (on, options) => {
         <Text> </Text>
         {f.error !== '' && <Text color="red">Error: {f.error}</Text>}
         {errAct !== '' && <Text color="red">Servidores (actividad): {errAct}</Text>}
-        <Text backgroundColor={AZUL} color={AMARILLO} bold>{llenar('  ' + col('ESTADO', 13) + col('SESION', ancho) + col('RC', 3) + col('DONDE', 13) + 'HACE')}</Text>
+        <Text backgroundColor={GRIS} color={AZUL} bold>{llenar('  ' + col('ESTADO', 13) + col('SESION', ancho) + col('RC', 3) + col('DONDE', 13) + 'HACE')}</Text>
         {filasTabla.map(r => {
           const elegida = r.k === selK
           const iconos = elegida && r.activa
@@ -874,7 +876,7 @@ export const register: Register = (on, options) => {
           return (
             <Box flexDirection="row">
               <Button key={`fila:${r.k}`} plain onPress={() => void update($, filaSel, () => r.k)}>
-                <Text backgroundColor={AZUL} color="white" bold={elegida}>
+                <Text backgroundColor={FONDO_TABLA} color="white" bold={elegida}>
                   {elegida ? '► ' : '  '}
                   <Text color={r.color === 'gray' ? 'white' : r.color}>{col(ESTADO_LARGO[r.estado] ?? r.estado, 13)}</Text>
                   {col(r.nombre, ancho)}
