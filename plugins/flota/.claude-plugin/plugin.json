@@ -1,6 +1,6 @@
 {
   "name": "flota",
-  "version": "0.2.0",
+  "version": "0.5.0",
   "description": "Live pane listing your Claude Code sessions (local and Remote Control) and the claude-rc instances on your servers, with restart, start and URL buttons",
   "license": "MIT",
   "types": "./types/index.d.ts",
@@ -16,6 +16,18 @@
       "title": "SSH command",
       "description": "Command used to reach the servers. On Windows with keys in WSL use: wsl ssh",
       "default": "ssh"
+    },
+    "devices": {
+      "type": "string",
+      "title": "Health devices",
+      "description": "Comma-separated devices for the health screen: 'laptop' (this machine) and SSH hosts, for example laptop,vps1,phone. Phones with Termux work too.",
+      "default": "laptop"
+    },
+    "typesafeKeyFile": {
+      "type": "string",
+      "title": "TypeSafe key file",
+      "description": "Path to a file holding your TypeSafe API key (for example ~/.secrets/typesafe.key). With it, Jev reads each session's last message and flags the ones waiting for you. Empty turns it off.",
+      "default": ""
     }
   }
 }
