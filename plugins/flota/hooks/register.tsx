@@ -60,11 +60,12 @@ const verTips = atom({ plugin: 'flota', key: 'verTips' } as const, false)
 function gb(kb: number): string {
   return kb >= 1048576 ? `${(kb / 1048576).toFixed(1)}G` : `${Math.round(kb / 1024)}M`
 }
+// Tiempo encendido con un solo formato y ancho fijo: " 2d 14h", " 0d 07h", "29d 03h".
 function dias(seg: number): string {
-  if (!seg) return '-'
-  if (seg < 3600) return `${Math.round(seg / 60)}m`
-  if (seg < 172800) return `${Math.round(seg / 3600)}h`
-  return `${(seg / 86400).toFixed(1)}d`
+  if (!seg) return '     -'
+  const d = Math.floor(seg / 86400)
+  const h = Math.floor((seg % 86400) / 3600)
+  return `${String(d).padStart(2)}d ${String(h).padStart(2, '0')}h`
 }
 const corto = (d: string) => d.replace(/^server/, 's')
 
@@ -706,7 +707,7 @@ export const register: Register = (on, options) => {
             { t: c(cpuTxt, 10), c: color(carga, 70, 100) },
             { t: c(`${ram}% ${gb(x.memTotal)}`, 13), c: color(ram, 70, 85) },
             { t: c(`${disco}% ${gb(x.diskTotal)}`, 13), c: color(disco, 80, 90) },
-            { t: c(dias(x.up), 7) },
+            { t: c(dias(x.up), 9) },
             x.tieneClaude ? { t: c(String(x.claude), 8) } : { t: c('sin', 8), c: 'magenta' },
             { t: x.rc >= 0 ? String(x.rc) : '-' },
           ],
@@ -721,7 +722,7 @@ export const register: Register = (on, options) => {
           <Text> </Text>
           {ventana(corto(elegido), lineasDisp)}
           <Text> </Text>
-          <Text backgroundColor={AZUL} color={AMARILLO} bold>{llenar(c('', 2) + c('DISP', 10) + c('CPU', 10) + c('RAM', 13) + c('DISCO', 13) + c('ENC', 7) + c('CLAUDE', 8) + 'RC')}</Text>
+          <Text backgroundColor={AZUL} color={AMARILLO} bold>{llenar(c('', 2) + c('DISP', 10) + c('CPU', 10) + c('RAM', 13) + c('DISCO', 13) + c('ENCEND', 9) + c('CLAUDE', 8) + 'RC')}</Text>
           {filasSalud.map(fl => {
             const largo = 2 + fl.celdas.reduce((n, x) => n + x.t.length, 0)
             return (

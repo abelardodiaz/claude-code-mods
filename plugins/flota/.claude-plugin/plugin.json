@@ -1,6 +1,6 @@
 {
   "name": "flota",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Live pane listing your Claude Code sessions (local and Remote Control) and the claude-rc instances on your servers, with restart, start and URL buttons",
   "license": "MIT",
   "types": "./types/index.d.ts",
