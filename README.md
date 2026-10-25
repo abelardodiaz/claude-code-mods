@@ -63,6 +63,19 @@ Then type `/flota`.
 - Only simple names and paths (`A-Z a-z 0-9 _ . / -`) are passed to SSH, and only to the hosts you listed.
 - Local sessions have no `claude-rc` behind them, so they get no restart, close or url actions.
 
+## flota-widget (Windows)
+
+The same Principal and Salud screens as a native Windows widget in `widget/` (Win32 + GDI, no WebView, one ~400 KB `.exe`), for when no Claude Code session is open. Always on top, tray icon (click shows or hides, right click opens the menu with **Start with Windows**), drag it from anywhere, `Esc` hides it.
+
+- Local sessions come from `claude agents --json`; servers from `claude-rc ls` over SSH, like the mod.
+- It reads the mod's options (`pluginConfigs["flota@claude-code-mods"]` in `~/.claude/settings.json`), so install and configure the mod first.
+
+```powershell
+cd widget
+cargo build --release
+# target\release\flota-widget.exe
+```
+
 ---
 
 ## Español
@@ -76,6 +89,10 @@ Un panel estilo Turbo Pascal dentro de Claude Code para tu flota de sesiones y l
 El botón **Tips** del menú prende una barra con los atajos de la pantalla actual.
 
 Instalación: igual que arriba (`/plugin install flota --marketplace abelardodiaz/claude-code-mods`). En las opciones pon tus servidores y dispositivos separados por comas y, en Windows con las llaves en WSL, `wsl ssh` como comando de SSH. Luego escribe `/flota`.
+
+### flota-widget (Windows)
+
+Las mismas pantallas Principal y Salud como widget nativo de Windows en `widget/` (Win32 + GDI, sin WebView, un solo `.exe` de unos 400 KB), para cuando no tienes ninguna sesión de Claude Code abierta. Siempre encima, icono en la bandeja (clic muestra u oculta, clic derecho abre el menú con **Iniciar con Windows**), se arrastra desde cualquier punto y `Esc` lo oculta. Lee las opciones del mod, así que primero instala y configura el mod. Se compila con `cargo build --release` dentro de `widget/`.
 
 ## License
 
